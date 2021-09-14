@@ -1,0 +1,6 @@
+# Project-specific
+Project/
+Build/
+
+# MacOS trash
+.DS_Store

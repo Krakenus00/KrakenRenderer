@@ -1,0 +1,12 @@
+[submodule "Modules/MythSDK"]
+	path = Modules/MythSDK
+	url = https://github.com/Krakenus00/MythSDK.git
+	branch = master
+[submodule "Modules/KrakenParts"]
+	path = Modules/KrakenParts
+	url = https://github.com/Krakenus00/KrakenParts.git
+	branch = master
+[submodule "Modules/HydraUI"]
+	path = Modules/HydraUI
+	url = https://github.com/Krakenus00/HydraUI.git
+	branch = master
