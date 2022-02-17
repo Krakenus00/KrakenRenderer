@@ -15,7 +15,7 @@ function CreateDir
 {
     param ($DirName)
 
-    if($CleanCache -eq "--clean") {
+    if(($CleanCache -eq "--clean") -and (Test-Path $DirName)) {
         Remove-Item $DirName -Recurse -Force
     }
 

@@ -8,7 +8,7 @@
 
 ]]
 
-message("Copyright ©2021 Mykhailo Mushynskyi.\nAll rights reserved.\n")
+message("\nCopyright ©2021 Mykhailo Mushynskyi.\nAll rights reserved.\n")
 
 cmake_minimum_required(VERSION 3.19)
 

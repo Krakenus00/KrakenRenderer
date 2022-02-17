@@ -31,4 +31,4 @@ set_target_properties(Main PROPERTIES
 include_sdk(Main)
 include_hydraIO(Main)
 include_hydraGUI(Main)
-include_krakenCores(Main)
+include_krakenParts(Main)

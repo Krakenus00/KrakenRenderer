@@ -1,7 +1,3 @@
-#ifndef UNICODE
-#define UNICODE
-#endif
-
 #if defined(_WIN32)
 
 #include "WinPrefs.h"
