@@ -45,3 +45,4 @@ endif()
 
 # Load targets
 include(${Root}/KrakenClientConfig.cmake)
+ 
