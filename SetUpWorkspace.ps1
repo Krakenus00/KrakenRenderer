@@ -48,7 +48,7 @@ CheckAvailability git
 CheckAvailability cmake
 
 Write-Output "`n-- Pulling git submodules........"
-git submodule update --remote --merge
+git submodule update --init --remote --merge
 
 Write-Output "`n-- Building the project.........."
 CreateDir .\Project
