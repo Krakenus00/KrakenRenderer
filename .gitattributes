@@ -3,7 +3,7 @@
 
 # Sources
 *.cpp           text diff=cpp
-*.h             text diff=cpp
+*.h             text diff=cpp linguist-language=c++
 
 # Documents
 *.md            text diff=markdown
