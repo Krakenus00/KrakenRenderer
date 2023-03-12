@@ -1,0 +1,8 @@
+namespace KrakenUI
+{
+    [default_interface]
+    runtimeclass EditorPage : Microsoft.UI.Xaml.Controls.Page
+    {
+        EditorPage();
+    }
+}

@@ -1,0 +1,9 @@
+*.user
+*.vso
+
+packages
+**/Generated Files
+**/bin
+**/Debug
+**/Release
+**/.vs
