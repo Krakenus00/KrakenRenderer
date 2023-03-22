@@ -32,9 +32,6 @@ namespace winrt::KrakenUI::implementation
             throw std::runtime_error("Unsupported OS version.");
         }
 
-        SetBackdrop();
-        closedRevoker = this->Closed(winrt::auto_revoke, { this, &MainWindow::OnClosed });
-
         titleBar = appWindow.TitleBar();
         titleBar.ExtendsContentIntoTitleBar(true);
         IReference<Windows::UI::Color> btnColor(Colors::Transparent());
@@ -43,6 +40,9 @@ namespace winrt::KrakenUI::implementation
         titleBar.ButtonBackgroundColor(btnColor);
         titleBar.InactiveBackgroundColor(btnColor);
         titleBar.ButtonInactiveBackgroundColor(btnColor);
+
+        SetBackdrop();
+        closedRevoker = this->Closed(auto_revoke, { this, &MainWindow::OnClosed });
     }
 
     AppWindow MainWindow::GetNativeWindow() const
@@ -80,8 +80,8 @@ namespace winrt::KrakenUI::implementation
     void MainWindow::GetAppWindow()
     {
         // There is no way to do it in WinUI, need to play with handlers.
-        auto windowNative{ this->try_as<::IWindowNative>() };
-        winrt::check_bool(windowNative);
+        auto windowNative{ this->try_as<IWindowNative>() };
+        check_bool(windowNative);
         windowNative->get_WindowHandle(&handler);
         windowId = GetWindowIdFromWindow(handler);
         appWindow = AppWindow::GetFromWindowId(windowId);
@@ -128,19 +128,15 @@ namespace winrt::KrakenUI::implementation
 
     void MainWindow::OnTitleBarSizeChanged(IInspectable const&, SizeChangedEventArgs const& args)
     {
-        Size floatSize = args.NewSize();
-        SizeInt32 newSize
-        { 
-            .Width  = static_cast<int32_t>(floatSize.Width),
-            .Height = static_cast<int32_t>(floatSize.Height)
-        };
+        Size newSize = args.NewSize();
+        auto scale = GetScaleAdjustment();
 
-        titleBar.SetDragRectangles({ { 
-            .X = appWindow.Size().Width - newSize.Width,
-            .Y = 0,
-            .Width  = newSize.Width,
-            .Height = newSize.Height
-        } });
+        int x = (appWindow.Size().Width - newSize.Width) * scale;
+        int y = 0;
+        int width  = newSize.Width  * scale;
+        int height = newSize.Height * scale;
+
+        titleBar.SetDragRectangles({ { x, y, width, height } });
     }
 
     DispatcherQueueController MainWindow::CreateSystemDispatcherQueueController()

@@ -15,12 +15,13 @@
             <TabView.TabItems>
                 <TabViewItem Header="TabItem1"
                              IsClosable="False">
-                    <TextBlock Text="Item 1"></TextBlock>
                 </TabViewItem>
                 <TabViewItem Header="TabItem2">
                     <Button x:Name="myButton">Click Me</Button>
                 </TabViewItem>
-                <TabViewItem Header="TabItem3"></TabViewItem>
+                <TabViewItem Header="TabItem3">
+                    <TextBlock Text="Item 1"></TextBlock>
+                </TabViewItem>
                 <TabViewItem Header="TabItem4"></TabViewItem>
             </TabView.TabItems>
         </TabView>
