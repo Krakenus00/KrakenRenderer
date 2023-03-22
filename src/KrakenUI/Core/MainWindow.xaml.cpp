@@ -13,6 +13,7 @@ using namespace Microsoft::UI::Composition;
 using namespace Microsoft::UI::Composition::SystemBackdrops;
 using namespace Microsoft::UI::Windowing;
 using namespace Microsoft::UI::Xaml;
+using namespace Microsoft::UI::Xaml::Media;
 using namespace Windows::Foundation;
 using namespace Windows::Graphics;
 using namespace Windows::System;
@@ -31,16 +32,17 @@ namespace winrt::KrakenUI::implementation
             throw std::runtime_error("Unsupported OS version.");
         }
 
-        titleBar = appWindow.TitleBar();
-        titleBar.ExtendsContentIntoTitleBar(true);
-        titleBarLoadedRevoker = TitleBar().Loaded(auto_revoke, {this, &MainWindow::OnTitleBarLoaded});
-        titleBarSizeChangedRevoker = TitleBar().SizeChanged(auto_revoke, { this, &MainWindow::OnTitleBarSizeChanged });
-        titleBar.PreferredHeightOption(TitleBarHeightOption::Tall);
-        // Buggy boyo, let it sit here for a while
-        //SetTitleBar(TitleBar());
-
         SetBackdrop();
         closedRevoker = this->Closed(winrt::auto_revoke, { this, &MainWindow::OnClosed });
+
+        titleBar = appWindow.TitleBar();
+        titleBar.ExtendsContentIntoTitleBar(true);
+        IReference<Windows::UI::Color> btnColor(Colors::Transparent());
+        // Make background transparent so it matches my custom title bar
+        titleBar.BackgroundColor(btnColor);
+        titleBar.ButtonBackgroundColor(btnColor);
+        titleBar.InactiveBackgroundColor(btnColor);
+        titleBar.ButtonInactiveBackgroundColor(btnColor);
     }
 
     AppWindow MainWindow::GetNativeWindow() const
@@ -112,60 +114,33 @@ namespace winrt::KrakenUI::implementation
         rootElement = this->Content().try_as<FrameworkElement>();
         if (rootElement)
         {
-            configuration.Theme(ConvertToSystemBackdropTheme(rootElement.ActualTheme()));
-            auto onThemeChanged = [this](auto&&, auto&&)
-            {
-                configuration.Theme(ConvertToSystemBackdropTheme(rootElement.ActualTheme()));
-            };
-            themeChangedRevoker = rootElement.ActualThemeChanged(auto_revoke, onThemeChanged);
+            // Initial state
+            OnThemeChanged(rootElement, { nullptr });
+
+            themeChangedRevoker = rootElement.ActualThemeChanged(auto_revoke, { this, &MainWindow::OnThemeChanged });
         }
     }
 
     void MainWindow::OnTitleBarLoaded(IInspectable const&, RoutedEventArgs const&)
     {
-        if (AppWindowTitleBar::IsCustomizationSupported())
-            SetDragRegionForCustomTitleBar(appWindow);
+        titleBarSizeChangedRevoker = CustomDragRegion().SizeChanged(auto_revoke, { this, &MainWindow::OnTitleBarSizeChanged });
     }
 
-    void MainWindow::OnTitleBarSizeChanged(IInspectable const&, SizeChangedEventArgs const&)
+    void MainWindow::OnTitleBarSizeChanged(IInspectable const&, SizeChangedEventArgs const& args)
     {
-        // Useless if ExtendsContentIntoTitleBar is false.
-        if (AppWindowTitleBar::IsCustomizationSupported() && titleBar.ExtendsContentIntoTitleBar())
-            SetDragRegionForCustomTitleBar(appWindow);
-    }
-
-    void MainWindow::SetDragRegionForCustomTitleBar(AppWindow apw)
-    {
-        if (titleBar.ExtendsContentIntoTitleBar())
-            return;
-
-        double scaleAdjustment = GetScaleAdjustment();
-
-        RightPaddingColumn().Width(GridLength(appWindow.TitleBar().RightInset() / scaleAdjustment));
-        LeftPaddingColumn().Width(GridLength(appWindow.TitleBar().LeftInset() / scaleAdjustment));
-
-        RectInt32 dragRectL
-        {
-            .X = static_cast<int32_t>(LeftPaddingColumn().ActualWidth() * scaleAdjustment),
-            .Y = 0,
-            // Count elements width
-            .Width = static_cast<int32_t>((IconColumn().ActualWidth() +
-                      TitleColumn().ActualWidth() +
-                      LeftDragColumn().ActualWidth()) * scaleAdjustment),
-            .Height = static_cast<int32_t>(TitleBar().ActualHeight() * scaleAdjustment),
+        Size floatSize = args.NewSize();
+        SizeInt32 newSize
+        { 
+            .Width  = static_cast<int32_t>(floatSize.Width),
+            .Height = static_cast<int32_t>(floatSize.Height)
         };
 
-        /* Non-draggable space */
-
-        RectInt32 dragRectR
-        {
-            .X = dragRectL.X + dragRectL.Width,
+        titleBar.SetDragRectangles({ { 
+            .X = appWindow.Size().Width - newSize.Width,
             .Y = 0,
-            .Width = static_cast<int32_t>(RightDragColumn().ActualWidth() * scaleAdjustment),
-            .Height = dragRectL.Height,
-        };
-
-        appWindow.TitleBar().SetDragRectangles({ dragRectL, dragRectR });
+            .Width  = newSize.Width,
+            .Height = newSize.Height
+        } });
     }
 
     DispatcherQueueController MainWindow::CreateSystemDispatcherQueueController()
@@ -174,14 +149,19 @@ namespace winrt::KrakenUI::implementation
 
         DispatcherQueueOptions options
         {
-            .dwSize = sizeof(DispatcherQueueOptions),
-            .threadType = DQTYPE_THREAD_CURRENT,
+            .dwSize        = sizeof(DispatcherQueueOptions),
+            .threadType    = DQTYPE_THREAD_CURRENT,
             .apartmentType = DQTAT_COM_NONE
         };
 
         abi::IDispatcherQueueController* ptr{ nullptr };
         check_hresult(CreateDispatcherQueueController(options, &ptr));
         return { ptr, take_ownership_from_abi };
+    }
+
+    IReference<Windows::UI::Color> MainWindow::GetColor(winrt::hstring const& brushName)
+    {
+        return Application::Current().Resources().Lookup(box_value(brushName)).as<SolidColorBrush>().Color();
     }
 
     SystemBackdropTheme MainWindow::ConvertToSystemBackdropTheme(ElementTheme const& theme)
@@ -213,5 +193,14 @@ namespace winrt::KrakenUI::implementation
     void MainWindow::OnActivated(IInspectable const&, WindowActivatedEventArgs const& args)
     {
         configuration.IsInputActive(WindowActivationState::Deactivated != args.WindowActivationState());
+    }
+
+    void MainWindow::OnThemeChanged(Microsoft::UI::Xaml::FrameworkElement const& sender, Windows::Foundation::IInspectable const&)
+    {
+        configuration.Theme(ConvertToSystemBackdropTheme(sender.ActualTheme()));
+        // Update caption buttons
+        titleBar.ButtonForegroundColor(GetColor(L"TextFillColorPrimaryBrush"));
+        titleBar.ButtonHoverBackgroundColor(GetColor(L"SubtleFillColorSecondaryBrush"));
+        titleBar.ButtonPressedBackgroundColor(GetColor(L"SubtleFillColorTertiaryBrush"));
     }
 }

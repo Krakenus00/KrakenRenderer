@@ -15,14 +15,16 @@ namespace winrt::KrakenUI::implementation
         double GetScaleAdjustment();
         void SetupSystemBackdropConfiguration();
         void SetBackdrop(Microsoft::UI::Composition::SystemBackdrops::MicaKind type = Microsoft::UI::Composition::SystemBackdrops::MicaKind::Base);
-        void SetDragRegionForCustomTitleBar(Microsoft::UI::Windowing::AppWindow apw);
         Microsoft::UI::Composition::SystemBackdrops::SystemBackdropTheme ConvertToSystemBackdropTheme(Microsoft::UI::Xaml::ElementTheme const& theme);
         Windows::System::DispatcherQueueController CreateSystemDispatcherQueueController();
-        // Events
+        Windows::Foundation::IReference<Windows::UI::Color> GetColor(winrt::hstring const& brushName);
+
+    public: // Events
         void OnClosed(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::WindowEventArgs const&);
         void OnActivated(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::WindowActivatedEventArgs const& args);
+        void OnThemeChanged(Microsoft::UI::Xaml::FrameworkElement const&, Windows::Foundation::IInspectable const&);
         void OnTitleBarLoaded(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::RoutedEventArgs const&);
-        void OnTitleBarSizeChanged(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::SizeChangedEventArgs const&);
+        void OnTitleBarSizeChanged(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::SizeChangedEventArgs const& args);
 
     private:
         HWND handler{ 0 };
