@@ -7,14 +7,22 @@
     mc:Ignorable="d">
     <Grid>
         <TabView x:Name="TitleBar"
-                 Loaded="OnTitleBarLoaded">
-            <TabView.TabStripFooter>
-                <Grid x:Name="CustomDragRegion"
-                      IsHitTestVisible="False" />
-            </TabView.TabStripFooter>
+                 Loaded="OnTitleBarLoaded"
+                 IsAddTabButtonVisible="False"
+                 TabWidthMode="SizeToContent">
+            <TabView.TabStripHeader>
+                <Image x:Name="AppIcon"
+                       Height="22"
+                       Width="22"
+                       Margin="8 10 0 0"
+                       Source="/Assets/StoreLogo.png"/>
+            </TabView.TabStripHeader>
             <TabView.TabItems>
-                <TabViewItem Header="TabItem1"
-                             IsClosable="False">
+                <TabViewItem Header="Editor" IsClosable="False">
+                    <TabViewItem.IconSource>
+                        <!--       ViewDashboard       -->
+                        <FontIconSource Glyph="&#xF246;"/>
+                    </TabViewItem.IconSource>
                 </TabViewItem>
                 <TabViewItem Header="TabItem2">
                     <Button x:Name="myButton">Click Me</Button>
@@ -24,6 +32,10 @@
                 </TabViewItem>
                 <TabViewItem Header="TabItem4"></TabViewItem>
             </TabView.TabItems>
+            <TabView.TabStripFooter>
+                <Grid x:Name="CustomDragRegion"
+                      IsHitTestVisible="False"/>
+            </TabView.TabStripFooter>
         </TabView>
     </Grid>
 </Window>
