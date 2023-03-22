@@ -13,6 +13,7 @@ using namespace Microsoft::UI::Composition;
 using namespace Microsoft::UI::Composition::SystemBackdrops;
 using namespace Microsoft::UI::Windowing;
 using namespace Microsoft::UI::Xaml;
+using namespace Microsoft::UI::Xaml::Controls;
 using namespace Microsoft::UI::Xaml::Media;
 using namespace Windows::Foundation;
 using namespace Windows::Graphics;
@@ -124,6 +125,8 @@ namespace winrt::KrakenUI::implementation
     void MainWindow::OnTitleBarLoaded(IInspectable const&, RoutedEventArgs const&)
     {
         titleBarSizeChangedRevoker = CustomDragRegion().SizeChanged(auto_revoke, { this, &MainWindow::OnTitleBarSizeChanged });
+        // Doesn't do shit in XAML
+        TitleBar().CloseButtonOverlayMode(TabViewCloseButtonOverlayMode::OnPointerOver);
     }
 
     void MainWindow::OnTitleBarSizeChanged(IInspectable const&, SizeChangedEventArgs const& args)
@@ -131,12 +134,28 @@ namespace winrt::KrakenUI::implementation
         Size newSize = args.NewSize();
         auto scale = GetScaleAdjustment();
 
-        int x = (appWindow.Size().Width - newSize.Width) * scale;
-        int y = 0;
-        int width  = newSize.Width  * scale;
-        int height = newSize.Height * scale;
+        // Completely not partable but whatever
+        // Maybe these properties will be available somewhere in the future
+        int tabViewTopEmptySpace = 11;
+        int invisibleButtonSpace = 16;
 
-        titleBar.SetDragRectangles({ { x, y, width, height } });
+        RectInt32 tabViewFooter
+        {
+            .X = static_cast<int>((appWindow.Size().Width - newSize.Width - invisibleButtonSpace) * scale),
+            .Y = 0,
+            .Width  = static_cast<int>(newSize.Width * scale),
+            .Height = static_cast<int>(newSize.Height * scale)
+        };
+
+        RectInt32 tabViewTopSpace
+        {
+            .X = 0,
+            .Y = 0,
+            .Width  = static_cast<int>((appWindow.Size().Width - tabViewFooter.Width) * scale),
+            .Height = static_cast<int>(tabViewTopEmptySpace * scale),
+        };
+
+        titleBar.SetDragRectangles({ tabViewTopSpace, tabViewFooter });
     }
 
     DispatcherQueueController MainWindow::CreateSystemDispatcherQueueController()
