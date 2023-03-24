@@ -10,7 +10,8 @@
         <TabView x:Name="TitleBar"
                  Loaded="OnTitleBarLoaded"
                  IsAddTabButtonVisible="False"
-                 TabWidthMode="SizeToContent">
+                 TabWidthMode="SizeToContent"
+                 VerticalAlignment="Stretch">
             <TabView.TabStripHeader>
                 <Image x:Name="AppIcon"
                        Height="22"
@@ -19,7 +20,7 @@
                        Source="/Assets/StoreLogo.png"/>
             </TabView.TabStripHeader>
             <TabView.TabItems>
-                <TabViewItem Header="Editor" IsClosable="False" VerticalAlignment="Stretch">
+                <TabViewItem Header="Editor" IsClosable="False">
                     <TabViewItem.IconSource>
                         <!--       ViewDashboard       -->
                         <FontIconSource Glyph="&#xF246;"/>
