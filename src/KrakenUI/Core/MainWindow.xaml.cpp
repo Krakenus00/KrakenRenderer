@@ -42,7 +42,7 @@ namespace winrt::KrakenUI::implementation
         titleBar.InactiveBackgroundColor(btnColor);
         titleBar.ButtonInactiveBackgroundColor(btnColor);
 
-        SetBackdrop();
+        SetBackdrop(MicaKind::BaseAlt);
         closedRevoker = this->Closed(auto_revoke, { this, &MainWindow::OnClosed });
     }
 
