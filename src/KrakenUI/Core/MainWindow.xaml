@@ -10,8 +10,8 @@
         <TabView x:Name="TitleBar"
                  Loaded="OnTitleBarLoaded"
                  IsAddTabButtonVisible="False"
-                 TabWidthMode="SizeToContent"
-                 VerticalAlignment="Stretch">
+                 VerticalAlignment="Stretch"
+                 TabCloseRequested="OnTabCloseRequested">
             <TabView.TabStripHeader>
                 <Image x:Name="AppIcon"
                        Height="22"
@@ -27,13 +27,6 @@
                     </TabViewItem.IconSource>
                     <local:EditorPage/>
                 </TabViewItem>
-                <TabViewItem Header="TabItem2">
-                    <Button x:Name="myButton">Click Me</Button>
-                </TabViewItem>
-                <TabViewItem Header="TabItem3">
-                    <TextBlock Text="Item 1"></TextBlock>
-                </TabViewItem>
-                <TabViewItem Header="TabItem4"></TabViewItem>
             </TabView.TabItems>
             <TabView.TabStripFooter>
                 <Grid x:Name="CustomDragRegion"

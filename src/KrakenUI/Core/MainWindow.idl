@@ -16,5 +16,7 @@ namespace KrakenUI
         void OnTitleBarLoaded([in] Object sender, [in] Microsoft.UI.Xaml.RoutedEventArgs args);
 
         void OnTitleBarSizeChanged([in] Object sender, [in] Microsoft.UI.Xaml.SizeChangedEventArgs args);
+
+        void OnTabCloseRequested([in] Microsoft.UI.Xaml.Controls.TabView sender, [in] Microsoft.UI.Xaml.Controls.TabViewTabCloseRequestedEventArgs args);
     }
 }

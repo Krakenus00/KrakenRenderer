@@ -158,6 +158,14 @@ namespace winrt::KrakenUI::implementation
         titleBar.SetDragRectangles({ tabViewTopSpace, tabViewFooter });
     }
 
+    void MainWindow::OnTabCloseRequested(TabView const& sender, TabViewTabCloseRequestedEventArgs const& args)
+    {
+        unsigned int index;
+        auto tabs = sender.TabItems();
+        tabs.IndexOf(args.Tab(), index);
+        tabs.RemoveAt(index);
+    }
+
     DispatcherQueueController MainWindow::CreateSystemDispatcherQueueController()
     {
         namespace abi = ABI::Windows::System;
