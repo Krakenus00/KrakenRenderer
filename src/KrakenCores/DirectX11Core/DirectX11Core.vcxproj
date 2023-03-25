@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="dummy.h" />
+    <ClInclude Include="DxDebug.h" />
     <ClInclude Include="framework.h" />
   </ItemGroup>
   <ItemGroup>

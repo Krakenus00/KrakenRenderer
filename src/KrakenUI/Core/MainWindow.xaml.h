@@ -15,17 +15,17 @@ namespace winrt::KrakenUI::implementation
         double GetScaleAdjustment();
         void SetupSystemBackdropConfiguration();
         void SetBackdrop(Microsoft::UI::Composition::SystemBackdrops::MicaKind type = Microsoft::UI::Composition::SystemBackdrops::MicaKind::Base);
-        Microsoft::UI::Composition::SystemBackdrops::SystemBackdropTheme ConvertToSystemBackdropTheme(Microsoft::UI::Xaml::ElementTheme const& theme);
+        Microsoft::UI::Composition::SystemBackdrops::SystemBackdropTheme ConvertToSystemBackdropTheme(const Microsoft::UI::Xaml::ElementTheme& theme);
         Windows::System::DispatcherQueueController CreateSystemDispatcherQueueController();
-        Windows::Foundation::IReference<Windows::UI::Color> GetColor(winrt::hstring const& brushName);
+        Windows::Foundation::IReference<Windows::UI::Color> GetColor(const winrt::hstring& brushName);
 
     public: // Events
-        void OnClosed(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::WindowEventArgs const&);
-        void OnActivated(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::WindowActivatedEventArgs const& args);
-        void OnThemeChanged(Microsoft::UI::Xaml::FrameworkElement const& sender, Windows::Foundation::IInspectable const&);
-        void OnTitleBarLoaded(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::RoutedEventArgs const&);
-        void OnTitleBarSizeChanged(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::SizeChangedEventArgs const& args);
-        void OnTabCloseRequested(Microsoft::UI::Xaml::Controls::TabView const& sender, Microsoft::UI::Xaml::Controls::TabViewTabCloseRequestedEventArgs const& args);
+        void OnClosed(const Windows::Foundation::IInspectable&, const Microsoft::UI::Xaml::WindowEventArgs&);
+        void OnActivated(const Windows::Foundation::IInspectable&, const Microsoft::UI::Xaml::WindowActivatedEventArgs& args);
+        void OnThemeChanged(const Microsoft::UI::Xaml::FrameworkElement& sender, const Windows::Foundation::IInspectable&);
+        void OnTitleBarLoaded(const Windows::Foundation::IInspectable&, const Microsoft::UI::Xaml::RoutedEventArgs&);
+        void OnTitleBarSizeChanged(const Windows::Foundation::IInspectable&, const Microsoft::UI::Xaml::SizeChangedEventArgs& args);
+        void OnTabCloseRequested(const Microsoft::UI::Xaml::Controls::TabView& sender, const Microsoft::UI::Xaml::Controls::TabViewTabCloseRequestedEventArgs& args);
 
     private:
         HWND handler{ 0 };
