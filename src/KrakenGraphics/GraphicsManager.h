@@ -1,7 +1,10 @@
 #pragma once
 
-class GraphicsManager
+namespace KrakenGraphics
 {
-    virtual void RegisterGraphicsCore() = 0;
-};
+    class GraphicsManager
+    {
+        virtual void RegisterGraphicsCore() = 0;
+    };
+}
 

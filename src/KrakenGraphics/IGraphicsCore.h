@@ -1,8 +1,8 @@
 #pragma once
 
-#include <>
+#include <cstdint>
 
 class IGraphicsCore
 {
-    int64_t
+    void 
 };

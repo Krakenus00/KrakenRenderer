@@ -86,13 +86,14 @@
   <ItemGroup>
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="KrakenException.cpp" />
-    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="IGraphicsCore.h" />
     <ClInclude Include="KrakenException.h" />
     <ClInclude Include="KrakenGraphics.h" />
+    <ClInclude Include="KrakenGraphicsException.h" />
+    <ClInclude Include="KrakenHelpers.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

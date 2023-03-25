@@ -153,10 +153,8 @@
   <ItemGroup>
     <ClInclude Include="dummy.h" />
     <ClInclude Include="DxDebug.h" />
-    <ClInclude Include="framework.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="dummy.cpp" />
   </ItemGroup>
   <ItemGroup>
