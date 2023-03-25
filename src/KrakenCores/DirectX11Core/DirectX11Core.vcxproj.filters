@@ -24,6 +24,9 @@
     <ClInclude Include="dummy.h">
       <Filter>API</Filter>
     </ClInclude>
+    <ClInclude Include="DxDebug.h">
+      <Filter>Private Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
