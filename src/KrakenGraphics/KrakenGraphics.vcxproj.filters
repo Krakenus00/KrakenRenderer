@@ -23,7 +23,7 @@
     <ClInclude Include="KrakenException.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
-    <ClInclude Include="KrakenGraphicsException.h">
+    <ClInclude Include="GraphicsException.h">
       <Filter>Exceptions</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsManager.h">
