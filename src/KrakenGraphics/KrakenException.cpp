@@ -1,3 +1,4 @@
+// Copyright 2023 Mykhailo Mushynskyi. All rights reserved.
 #include "KrakenException.h"
 
 #include "KrakenHelpers.h"

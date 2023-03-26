@@ -24,9 +24,21 @@
     <ClInclude Include="DxDebug.h">
       <Filter>Private Headers</Filter>
     </ClInclude>
+    <ClInclude Include="DirectX11Core.h">
+      <Filter>Private Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="WinAPIToggles.h">
+      <Filter>Private Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="KrakenWindows.h">
+      <Filter>Private Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dummy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectX11Core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

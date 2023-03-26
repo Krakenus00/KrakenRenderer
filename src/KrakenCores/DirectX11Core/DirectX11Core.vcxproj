@@ -151,10 +151,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DirectX11Core.h" />
     <ClInclude Include="dummy.h" />
     <ClInclude Include="DxDebug.h" />
+    <ClInclude Include="KrakenWindows.h" />
+    <ClInclude Include="WinAPIToggles.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DirectX11Core.cpp" />
     <ClCompile Include="dummy.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,3 +1,4 @@
+// Copyright 2023 Mykhailo Mushynskyi. All rights reserved.
 #include "pch.h"
 #include "MainWindow.xaml.h"
 #if __has_include("MainWindow.g.cpp")

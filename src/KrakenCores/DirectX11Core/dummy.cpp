@@ -1,3 +1,5 @@
+// Copyright 2023 Mykhailo Mushynskyi. All rights reserved.
+
 // MathLibrary.cpp : Defines the exported functions for the DLL.
 #include <utility>
 #include <limits.h>

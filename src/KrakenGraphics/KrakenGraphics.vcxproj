@@ -94,6 +94,7 @@
     <ClInclude Include="KrakenGraphics.h" />
     <ClInclude Include="KrakenGraphicsException.h" />
     <ClInclude Include="KrakenHelpers.h" />
+    <ClInclude Include="KrakenTypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

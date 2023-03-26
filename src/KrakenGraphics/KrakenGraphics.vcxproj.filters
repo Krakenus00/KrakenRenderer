@@ -38,5 +38,8 @@
     <ClInclude Include="KrakenHelpers.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="KrakenTypes.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
