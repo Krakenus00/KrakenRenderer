@@ -164,9 +164,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KrakenCores\DirectX11Core\DirectX11Core.vcxproj">
-      <Project>{a0c5363e-9811-4223-8fd2-78f9383d3576}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\KrakenGraphics\KrakenGraphics.vcxproj">
       <Project>{8cfecebc-59f2-43dd-a6cc-0ea5391ed057}</Project>
     </ProjectReference>
