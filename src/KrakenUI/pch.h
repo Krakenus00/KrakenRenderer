@@ -1,5 +1,4 @@
-// Copyright (c) Microsoft Corporation and Contributors.
-// Licensed under the MIT License.
+// Copyright 2023 Mykhailo Mushynskyi. All rights reserved.
 
 #pragma once
 #include <windows.h>

@@ -3,9 +3,9 @@
 
 namespace KrakenGraphics
 {
-    class GraphicsManager
+    enum class PixelFormat: unsigned int
     {
-        virtual void RegisterGraphicsCore() = 0;
+        RGBA_8_UNorm,
+        RGBA_16_UNorm
     };
 }
-

@@ -1,3 +1,5 @@
+// Copyright 2023 Mykhailo Mushynskyi. All rights reserved.
+
 // MathLibrary.h - Contains declarations of math functions
 #pragma once
 

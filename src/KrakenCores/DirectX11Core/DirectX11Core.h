@@ -1,6 +1,10 @@
 // Copyright 2023 Mykhailo Mushynskyi. All rights reserved.
 #pragma once
 
-class IGraphicsCore
+namespace KrakenGraphics
 {
-};
+    class DirectX11Core
+    {
+
+    };
+}
