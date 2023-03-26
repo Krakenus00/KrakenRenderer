@@ -1,4 +1,4 @@
 ﻿extensions: .cpp .h
 // Copyright 2023 Mykhailo Mushynskyi. All rights reserved.
-extensions:  .xaml .config
+extensions: .xaml
 <!-- Copyright 2023 Mykhailo Mushynskyi. All rights reserved. -->
