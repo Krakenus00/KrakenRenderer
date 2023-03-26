@@ -10,33 +10,30 @@ namespace KrakenGraphics
 {
     class KrakenException
     {
-    public: // Non-static constructors and desctructor
-        KrakenException() = default;
-        KrakenException(const KrakenException&) = default;
-        KrakenException(KrakenException&&) = default;
-        KrakenException(const std::wstring& description);
-    #ifndef NDEBUG
-        KrakenException(const std::wstring& description, size_t line, const std::wstring& file);
-    #endif
-        ~KrakenException() = default;
+    public: // Constructors and desctructor
+        KrakenException() noexcept = default;
+        KrakenException(const KrakenException&) noexcept = default;
+        KrakenException(KrakenException&&) noexcept = default;
+        ~KrakenException() noexcept = default;
 
-    public: // Non-static members
-        virtual std::wstring what() const { return _description; }
-    #ifndef NDEBUG
-        std::wstring file() const { return _file; }
-        size_t       line() const { return _line; }
-    #endif
+        KrakenException(const std::wstring& description, size_t line = 0, const std::wstring& file = L"") noexcept;
 
-    private: // Non-static fields
+    public: // Operators
+        KrakenException& operator=(const KrakenException&) = default;
+        KrakenException& operator=(KrakenException&&) = default;
+
+    public: // Members
+        virtual const std::wstring& what() const noexcept { return _description; }
+        const std::wstring& file() const noexcept { return _file; }
+        size_t line() const noexcept { return _line; }
+
+    protected: // Fields
         std::wstring    _description;
-    #ifndef NDEBUG
         size_t          _line;
         std::wstring    _file;
-    #endif
     };
 }
 
-// Helper to switch between Release and Debug donstructors
 #ifdef NDEBUG
 #define DEBUG_TRACE
 #else
