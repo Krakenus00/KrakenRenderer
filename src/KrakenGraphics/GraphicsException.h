@@ -5,7 +5,7 @@
 
 namespace KrakenGraphics
 {
-    class KrakenGraphicsException: public KrakenException
+    class GraphicsException: virtual public KrakenException
     {
     public:
         using KrakenException::KrakenException;
