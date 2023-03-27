@@ -92,7 +92,6 @@
     <ClInclude Include="IGraphicsCore.h" />
     <ClInclude Include="KrakenException.h" />
     <ClInclude Include="KrakenGraphics.h" />
-    <ClInclude Include="GraphicsException.h" />
     <ClInclude Include="KrakenHelpers.h" />
     <ClInclude Include="KrakenTypes.h" />
   </ItemGroup>

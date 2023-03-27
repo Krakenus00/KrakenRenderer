@@ -27,6 +27,9 @@
     <ClCompile Include="DirectXException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DirectXDeviceRemovedException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectX11Core.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DirectXException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXDeviceRemovedException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
