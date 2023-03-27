@@ -131,12 +131,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DirectX11Core.cpp" />
+    <ClCompile Include="DirectXDeviceRemovedException.cpp" />
     <ClCompile Include="DirectXException.cpp" />
     <ClCompile Include="DXGIInfoManager.cpp" />
     <ClCompile Include="WindowsException.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectX11Core.h" />
+    <ClInclude Include="DirectXDeviceRemovedException.h" />
     <ClInclude Include="DirectXException.h" />
     <ClInclude Include="DirectXHelpers.h" />
     <ClInclude Include="DX11APIMacro.h" />
