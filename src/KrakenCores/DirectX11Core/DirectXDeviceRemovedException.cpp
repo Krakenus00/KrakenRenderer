@@ -1,0 +1,1 @@
+#include "DirectXDeviceRemovedException.h"

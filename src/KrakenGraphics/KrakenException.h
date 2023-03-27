@@ -35,7 +35,7 @@ namespace KrakenGraphics
 }
 
 #ifdef NDEBUG
-#define DEBUG_TRACE
+#define DEBUG_TRACE 0
 #else
-#define DEBUG_TRACE , __LINE__, __WFILE__
+#define DEBUG_TRACE __LINE__, __WFILE__
 #endif
