@@ -1,14 +1,10 @@
+// Copyright 2023 Mykhailo Mushynskyi. All rights reserved.
 #pragma once
 
 #include "WindowsException.h"
-#include "GraphicsException.h"
 
 namespace KrakenGraphics
 {
-    class DirectXException
-        : public WindowsException
-        , public GraphicsException
-    {
-
-    };
+    class DirectXException: public WindowsException
+    {};
 }
