@@ -23,9 +23,11 @@ namespace KrakenGraphics
         KrakenException& operator=(KrakenException&&) = default;
 
     public: // Members
-        virtual const std::wstring& what() const noexcept { return _description; }
+        const std::wstring& description() const noexcept { return _description; }
         const std::wstring& file() const noexcept { return _file; }
         size_t line() const noexcept { return _line; }
+
+        virtual std::wstring what() const noexcept { return description(); }
 
     protected: // Fields
         std::wstring    _description;

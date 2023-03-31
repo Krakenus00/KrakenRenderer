@@ -26,6 +26,8 @@ namespace KrakenGraphics
 		std::wstring WinAPIErr() const;
 		std::wstring ToString() const;
 
+        virtual std::wstring what() const noexcept { return ToString(); }
+
 	protected: // Fields
 		HRESULT				      _hr;
 		std::vector<std::wstring> _info;

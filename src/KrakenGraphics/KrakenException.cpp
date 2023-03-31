@@ -5,7 +5,7 @@
 
 namespace KrakenGraphics
 {
-    KrakenException::KrakenException(const std::wstring& description, size_t line, const std::wstring& file)
+    KrakenException::KrakenException(const std::wstring& description, size_t line, const std::wstring& file) noexcept
         : _description(description)
         , _line(line)
         , _file(file)
