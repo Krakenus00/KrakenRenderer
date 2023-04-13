@@ -4,8 +4,9 @@
 #include "DirectXHelpers.h"
 #include "WindowsException.h"
 
-#pragma comment(lib, "dxguid.lib")
+#include <memory>
 
+#pragma comment(lib, "dxguid.lib")
 
 namespace KrakenGraphics
 {
@@ -17,17 +18,15 @@ namespace KrakenGraphics
 		// Load the dll that contains the function DXGIGetDebugInterface.
 		const auto hModDxgiDebug = LoadLibraryEx(L"dxgidebug.dll", nullptr, LOAD_LIBRARY_SEARCH_SYSTEM32);
 		if (!hModDxgiDebug)
-			throw WindowsException(GetLastError());
+			throw WinException(GetLastError());
 
 		// Get address of DXGIGetDebugInterface in dll
-		const auto DxgiGetDebugInterface = reinterpret_cast<DXGIGetDebugInterface>(
-			reinterpret_cast<void*>(GetProcAddress(hModDxgiDebug, "DXGIGetDebugInterface"))
-			);
+		const auto DxgiGetDebugInterface = reinterpret_cast<DXGIGetDebugInterface>(GetProcAddress(hModDxgiDebug, "DXGIGetDebugInterface"));
 		if (!DxgiGetDebugInterface)
-			throw WindowsException(GetLastError());
+			throw WinException(GetLastError());
 
 		HRESULT hr;
-		GFX_THROW_NOINFO(DxgiGetDebugInterface(__uuidof(IDXGIInfoQueue), &pDxgiInfoQueue));
+		WinCheck(DxgiGetDebugInterface(__uuidof(IDXGIInfoQueue), &pDxgiInfoQueue));
 	}
 
 	void DXGIInfoManager::Set() noexcept
@@ -46,13 +45,16 @@ namespace KrakenGraphics
 			HRESULT hr;
 			SIZE_T messageLength;
 			// get the size of message i in bytes
-			GFX_THROW_NOINFO(pDxgiInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, nullptr, &messageLength));
+			WinCheck(pDxgiInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, nullptr, &messageLength));
 			// allocate memory for message
 			auto bytes = std::make_unique<byte[]>(messageLength);
 			auto pMessage = reinterpret_cast<DXGI_INFO_QUEUE_MESSAGE*>(bytes.get());
 			// get the message and push its description into the vector
-			GFX_THROW_NOINFO(pDxgiInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, pMessage, &messageLength));
-			messages.emplace_back(pMessage->pDescription);
+			WinCheck(pDxgiInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, pMessage, &messageLength));
+			// Not sure if pDescription is guaranteed to be a wide string if used with GetMessageW
+			// TODO: Test if it works :)
+			std::wstring message(reinterpret_cast<const wchar_t*>(pMessage->pDescription));
+			messages.push_back(message);
 		}
 		return messages;
 	}

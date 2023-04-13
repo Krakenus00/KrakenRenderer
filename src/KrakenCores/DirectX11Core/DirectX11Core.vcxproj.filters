@@ -38,16 +38,13 @@
     <ClInclude Include="DirectXHelpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DX11APIMacro.h">
+    <ClInclude Include="DirectX11CoreAPIMacro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DxDebug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DXGIInfoManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KrakenWindows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WinAPIToggles.h">
@@ -60,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DirectXDeviceRemovedException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KrakenWindows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

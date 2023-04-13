@@ -6,5 +6,12 @@
 namespace KrakenGraphics
 {
     class DirectXException: public WindowsException
-    {};
+    {
+        using WindowsException::WindowsException;
+    };
+
+    class DirectXDeviceRemovedException: public DirectXException
+    {
+        using DirectXException::DirectXException;
+    };
 }

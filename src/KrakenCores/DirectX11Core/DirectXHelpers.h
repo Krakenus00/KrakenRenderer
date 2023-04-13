@@ -4,19 +4,18 @@
 // HRESULT hr should exist in the local scope for these macros to work
 
 #define WinBeginTrace() HRESULT hr
-#define WinException(hr) KrakenGraphics::WindowsException(hr, L"", {}, DEBUG_TRACE)
-#define WinLast() WinExcept(GetLastError())
+#define WinException(hr) ::KrakenGraphics::WindowsException(hr, L"", {}, DEBUG_TRACE)
 #define WinCheck(hrcall) do { if( FAILED( hr = (hrcall) ) ) throw WinException(hr); } while (0)
 
 #ifndef NDEBUG
-#define DxException(hr) KrakenGraphics::DirectXException(hr, L"", infoManager.GetMessages(), DEBUG_TRACE)
-#define DxCheck(hrcall) do { infoManager.Set(); if( FAILED( hr = (hrcall) ) ) throw DxException(hr); } while(0)
-#define DxDeviceRemovedException(hr) KrakenGraphics::DirectXDeviceRemovedException(hr, L"", infoManager.GetMessages(), DEBUG_TRACE)
-#define DxCheckInfo(call) do { infoManager.Set(); (call); {auto msgs = infoManager.GetMessages(); if(!msgs.empty()) throw KrakenGraphics::DirectXException(hr, L"", msgs, DEBUG_TRACE);}} while(0)
+#define DxException(hr) ::KrakenGraphics::DirectXException(hr, L"", pInfoManager->GetMessages(), DEBUG_TRACE)
+#define DxCheck(hrcall) do { pInfoManager->Set(); if( FAILED( hr = (hrcall) ) ) throw DxException(hr); } while(0)
+#define DxDeviceRemovedException(hr) ::KrakenGraphics::DirectXDeviceRemovedException(hr, L"", pInfoManager->GetMessages(), DEBUG_TRACE)
+#define DxCheckInfo(call) do { pInfoManager->Set(); (call); {auto msgs = pInfoManager->GetMessages(); if(!msgs.empty()) throw ::KrakenGraphics::DirectXException(hr, L"", msgs, DEBUG_TRACE);}} while (0)
 #else
-#define DxException(hr) KrakenGraphics::DirectXException(hr)
+#define DxException(hr) ::KrakenGraphics::DirectXException(hr)
 #define DxCheck(hrcall) do { if( FAILED( hr = (hrcall) ) ) throw DxException(hr); } while(0)
-#define DxDeviceRemovedException(hr) KrakenGraphics::DirectXDeviceRemovedException(hr)
+#define DxDeviceRemovedException(hr) ::KrakenGraphics::DirectXDeviceRemovedException(hr)
 #define DxCheckInfo(call) (call)
 #endif
 
@@ -24,5 +23,5 @@
 #ifdef NDEBUG
 #define DxBeginTrace(gfx) WinBeginTrace()
 #else
-#define DxBeginTrace(gfx) WinBeginTrace(); KrakenGraphics::DXGIInfoManager& infoManager = GetInfoManager((gfx))
+#define DxBeginTrace(gfx) do { WinBeginTrace(); std::shared_ptr<::KrakenGraphics::DXGIInfoManager> pInfoManager = GetInfoManager((gfx)); } while (0)
 #endif

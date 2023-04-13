@@ -8,7 +8,7 @@ false;
 true;
 #endif
 
-#define APPEND_WIDEC_LITERAL(x) L##x
-#define WIDEC_PATH_UNWRAP(x) APPEND_WIDEC_LITERAL(x)
+#define APPEND_LITERAL_MACRO(x) L##x
+#define WIDEC_PATH_UNWRAP(x) APPEND_LITERAL_MACRO(x)
 // Path to a source file as wchar_t.
 #define __WFILE__ WIDEC_PATH_UNWRAP(__FILE__)
