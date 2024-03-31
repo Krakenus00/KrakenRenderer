@@ -24,7 +24,7 @@ namespace KrakenGraphics
 		HRESULT hr() const noexcept { return _hr; }
 		const std::vector<std::wstring>& info() const noexcept { return _info; }
 		std::wstring WinAPIErr() const;
-		std::wstring ToString() const;
+		std::wstring ToString() const; // Might be used by WinRT functions
 
         virtual std::wstring what() const noexcept { return ToString(); }
 

@@ -1,6 +1,7 @@
 // Copyright 2023 Mykhailo Mushynskyi. All rights reserved.
 #include "WindowsException.h"
 
+#include <numeric>
 #include <sstream>
 #include <format>
 
@@ -19,32 +20,37 @@ namespace KrakenGraphics
 	std::wstring WindowsException::WinAPIErr() const
 	{
 		std::wstring errDesc{ 512, L'\0' };
-		FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM, nullptr, _hr, 0, errDesc.data(), errDesc.size(), nullptr);
+		FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM, nullptr, _hr, 0, errDesc.data(), static_cast<DWORD>(errDesc.size()), nullptr);
+		return errDesc;
 	}
 
 	std::wstring WindowsException::ToString() const
 	{
-		static const std::wstring descTemplate =
+		constexpr std::wstring_view descTemplate =
 			L"KrakenGraphics::WindowsException\n"
 			L"[Error Code] 0x{:#08x} ({:d})\n"
 			L"[Description] {:s}\n";
-		static const std::wstring infoTemplate =
+		constexpr std::wstring_view infoTemplate =
 			L"\n[Error Info]\n"
 			L"{:s}\n";
-		static const std::wstring descTemplate =
+		constexpr std::wstring_view commentTemplate =
 			L"\n[Comment] {:s}\n";
-		static const std::wstring originTemplate =
+		constexpr std::wstring_view originTemplate =
 			L"\n[File] {:s}\n"
 			L"[Line] {:d}\n";
 
-		std::wstring errTemplate = descTemplate;
-		if (!_info.empty()) errTemplate += infoTemplate;
-		if (!_description.empty()) errTemplate += descTemplate;
-		if (_line) errTemplate += originTemplate;
 
-		std::wstring infoUnpacked(_info.begin(), _info.end());
-		std::wstring winErrDesc = _hr ? WinAPIErr() : L"The problematic function returns void.";
+		std::wstring winErrDesc = static_cast<bool>(_hr) ? WinAPIErr() : L"The problematic function returns void.";
 
-		return std::format(errTemplate, _hr, _hr, WinAPIErr(), infoUnpacked, _file, _line, _description);
+		std::wstring output = std::format(descTemplate, _hr, _hr, winErrDesc);
+
+		if (!_info.empty())
+			output += std::format(infoTemplate, std::accumulate(_info.begin(), _info.end(), std::wstring{}));
+		if (!_description.empty())
+			output += std::format(commentTemplate, _description);
+		if (_line)
+			output += std::format(originTemplate, _file, _line);
+
+		return output;
 	}
 }

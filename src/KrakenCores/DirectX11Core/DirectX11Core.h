@@ -3,13 +3,6 @@
 
 #include "DirectX11CoreAPIMacro.h"
 
-#include "IGraphicsCore.h"
-#include "KrakenHelpers.h"
-
-#ifndef NDEBUG
-#include "DXGIInfoManager.h"
-#endif
-
 #include <memory>
 #include <random>
 #include <vector>
@@ -20,24 +13,27 @@
 #include <d3d11.h>
 #include <wrl.h>
 
+#include "IGraphicsCore.h"
+#include "KrakenHelpers.h"
+
 namespace KrakenGraphics
 {
-    class DIRECTX11CORE_API DirectX11Core: public IGraphicsCore
+    class DirectX11Core: public IGraphicsCore
     {
 	public:
-		DirectX11Core() = delete;
-		DirectX11Core(HWND hwnd);
-		DirectX11Core(const DirectX11Core&) = delete;
-		DirectX11Core& operator=(const DirectX11Core&) = delete;
-		~DirectX11Core() = default;
+		DIRECTX11CORE_API DirectX11Core() = delete;
+		DIRECTX11CORE_API DirectX11Core(HWND hwnd);
+		DIRECTX11CORE_API DirectX11Core(const DirectX11Core&) = delete;
+		DIRECTX11CORE_API DirectX11Core& operator=(const DirectX11Core&) = delete;
+		DIRECTX11CORE_API ~DirectX11Core() = default;
 
-		void EndFrame();
-		void BeginFrame(float red, float green, float blue) noexcept;
-		void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
-		void SetProjection(DirectX::FXMMATRIX proj) noexcept;
-		DirectX::XMMATRIX GetProjection() const noexcept;
-		void SetCamera(DirectX::FXMMATRIX cam) noexcept;
-		DirectX::XMMATRIX GetCamera() const noexcept;
+		DIRECTX11CORE_API void EndFrame();
+		DIRECTX11CORE_API void BeginFrame(float red, float green, float blue) noexcept;
+		DIRECTX11CORE_API void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
+		DIRECTX11CORE_API void SetProjection(DirectX::FXMMATRIX proj) noexcept;
+		DIRECTX11CORE_API DirectX::XMMATRIX GetProjection() const noexcept;
+		DIRECTX11CORE_API void SetCamera(DirectX::FXMMATRIX cam) noexcept;
+		DIRECTX11CORE_API DirectX::XMMATRIX GetCamera() const noexcept;
 
 	private:
 		DirectX::XMMATRIX projection;
@@ -47,9 +43,5 @@ namespace KrakenGraphics
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDSV;
-
-	#ifndef NDEBUG
-		std::shared_ptr<DXGIInfoManager> pInfoManager;
-	#endif
     };
 }

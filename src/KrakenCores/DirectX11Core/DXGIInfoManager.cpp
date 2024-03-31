@@ -11,6 +11,8 @@
 namespace KrakenGraphics
 {
 	DXGIInfoManager::DXGIInfoManager()
+		: next(0u)
+		, pDxgiInfoQueue()
 	{
 		// Define function signature of DXGIGetDebugInterface.
 		typedef HRESULT(WINAPI* DXGIGetDebugInterface)(REFIID, void**);
@@ -42,8 +44,8 @@ namespace KrakenGraphics
 		const auto end = pDxgiInfoQueue->GetNumStoredMessages(DXGI_DEBUG_ALL);
 		for (auto i = next; i < end; i++)
 		{
-			HRESULT hr;
-			SIZE_T messageLength;
+			HRESULT hr = 0;
+			SIZE_T messageLength = 0;
 			// get the size of message i in bytes
 			WinCheck(pDxgiInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, nullptr, &messageLength));
 			// allocate memory for message
@@ -57,5 +59,11 @@ namespace KrakenGraphics
 			messages.push_back(message);
 		}
 		return messages;
+	}
+
+	DXGIInfoManager& DXGIInfoManager::GetInstance() noexcept
+	{
+		static DXGIInfoManager instance;
+		return instance;
 	}
 }

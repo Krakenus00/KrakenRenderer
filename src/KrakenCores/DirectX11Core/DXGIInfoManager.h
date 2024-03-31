@@ -19,11 +19,13 @@ namespace KrakenGraphics
 		~DXGIInfoManager() = default;
 		DXGIInfoManager(const DXGIInfoManager&) = delete;
 		DXGIInfoManager& operator=(const DXGIInfoManager&) = delete;
+		static DXGIInfoManager& GetInstance() noexcept;
+
 		void Set() noexcept;
 		std::vector<std::wstring> GetMessages() const;
 
 	private:
-		UINT64 next = 0u;
+		UINT64 next;
 		Microsoft::WRL::ComPtr<IDXGIInfoQueue> pDxgiInfoQueue;
 	};
 }
