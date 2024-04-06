@@ -4,5 +4,19 @@ namespace KrakenUI
     runtimeclass MainWindow : Microsoft.UI.Xaml.Window
     {
         MainWindow();
+
+        Microsoft.UI.Windowing.AppWindow GetNativeWindow();
+
+        void OnClosed([in] Object sender, [in] Microsoft.UI.Xaml.WindowEventArgs args);
+
+        void OnActivated([in] Object sender, [in] Microsoft.UI.Xaml.WindowActivatedEventArgs args);
+
+        void OnThemeChanged([in] Microsoft.UI.Xaml.FrameworkElement sender, [in] Object args);
+
+        void OnTitleBarLoaded([in] Object sender, [in] Microsoft.UI.Xaml.RoutedEventArgs args);
+
+        void OnTitleBarSizeChanged([in] Object sender, [in] Microsoft.UI.Xaml.SizeChangedEventArgs args);
+
+        void OnTabCloseRequested([in] Microsoft.UI.Xaml.Controls.TabView sender, [in] Microsoft.UI.Xaml.Controls.TabViewTabCloseRequestedEventArgs args);
     }
 }

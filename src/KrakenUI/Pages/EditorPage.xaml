@@ -5,8 +5,37 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Grid x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="25*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="25*"/>
+        </Grid.ColumnDefinitions>
+        <SwapChainPanel x:Name="Viewport"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"/>
+        <StackPanel x:Name="RightColumn"
+                    Background="AliceBlue"
+                    Orientation="Vertical"
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Grid.Column="2">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+        </StackPanel>
+        <StackPanel x:Name="BottomRow"
+                    Background="Aqua"
+                    Orientation="Horizontal"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
+
+        </StackPanel>
+    </Grid>
 </Page>

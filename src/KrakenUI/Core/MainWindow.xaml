@@ -4,9 +4,34 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:KrakenUI"
     mc:Ignorable="d">
-
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+    <Grid>
+        <TabView x:Name="TitleBar"
+                 Loaded="OnTitleBarLoaded"
+                 IsAddTabButtonVisible="False"
+                 VerticalAlignment="Stretch"
+                 TabCloseRequested="OnTabCloseRequested">
+            <TabView.TabStripHeader>
+                <Image x:Name="AppIcon"
+                       Height="22"
+                       Width="22"
+                       Margin="8 10 0 0"
+                       Source="/Assets/StoreLogo.png"/>
+            </TabView.TabStripHeader>
+            <TabView.TabItems>
+                <TabViewItem Header="Editor" IsClosable="False">
+                    <TabViewItem.IconSource>
+                        <!--       ViewDashboard       -->
+                        <FontIconSource Glyph="&#xF246;"/>
+                    </TabViewItem.IconSource>
+                    <local:EditorPage/>
+                </TabViewItem>
+            </TabView.TabItems>
+            <TabView.TabStripFooter>
+                <Grid x:Name="CustomDragRegion"
+                      IsHitTestVisible="False"/>
+            </TabView.TabStripFooter>
+        </TabView>
+    </Grid>
 </Window>

@@ -13,9 +13,4 @@ namespace winrt::KrakenUI::implementation
     {
         InitializeComponent();
     }
-
-    void EditorPage::myButton_Click(IInspectable const&, RoutedEventArgs const&)
-    {
-        myButton().Content(box_value(L"Clicked"));
-    }
 }

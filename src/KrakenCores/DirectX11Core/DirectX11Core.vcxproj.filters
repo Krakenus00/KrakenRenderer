@@ -21,9 +21,15 @@
     <ClInclude Include="framework.h">
       <Filter>Private Headers</Filter>
     </ClInclude>
+    <ClInclude Include="dummy.h">
+      <Filter>API</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dummy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
