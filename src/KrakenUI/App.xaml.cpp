@@ -1,3 +1,4 @@
+// Copyright 2023 Mykhailo Mushynskyi. All rights reserved.
 #include "pch.h"
 
 #include "App.xaml.h"
@@ -20,7 +21,7 @@ App::App()
     InitializeComponent();
 
 #if defined _DEBUG && !defined DISABLE_XAML_GENERATED_BREAK_ON_UNHANDLED_EXCEPTION
-    UnhandledException([this](IInspectable const&, UnhandledExceptionEventArgs const& e)
+    UnhandledException([this](const IInspectable&, const UnhandledExceptionEventArgs& e)
     {
         if (IsDebuggerPresent())
         {
@@ -35,7 +36,7 @@ App::App()
 /// Invoked when the application is launched.
 /// </summary>
 /// <param name="e">Details about the launch request and process.</param>
-void App::OnLaunched(LaunchActivatedEventArgs const&)
+void App::OnLaunched(const LaunchActivatedEventArgs&)
 {
     window = make<MainWindow>();
     window.Activate();

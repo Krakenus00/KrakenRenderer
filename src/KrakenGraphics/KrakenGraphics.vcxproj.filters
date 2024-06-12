@@ -1,18 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Exceptions">
+      <UniqueIdentifier>{adf1b202-bd5c-4243-9964-26073c6d922f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Core">
+      <UniqueIdentifier>{b86c587d-b73e-4994-a86d-16cebb05cb87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interfaces">
+      <UniqueIdentifier>{97d95e6f-1343-4245-9fa9-9c7ae4d64a48}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="KrakenException.cpp">
+      <Filter>Exceptions</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicsManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="KrakenException.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="IGraphicsCore.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="KrakenGraphics.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="KrakenHelpers.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="KrakenTypes.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 packages
 **/Generated Files
 **/bin
+**/x64
 **/Debug
 **/Release
 **/.vs
