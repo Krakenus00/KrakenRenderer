@@ -1,3 +1,4 @@
+// Copyright 2023 Mykhailo Mushynskyi. All rights reserved.
 #pragma once
 
 #include "App.xaml.g.h"
@@ -8,7 +9,7 @@ namespace winrt::KrakenUI::implementation
     {
         App();
 
-        void OnLaunched(Microsoft::UI::Xaml::LaunchActivatedEventArgs const&);
+        void OnLaunched(const Microsoft::UI::Xaml::LaunchActivatedEventArgs&);
 
     private:
         winrt::Microsoft::UI::Xaml::Window window{ nullptr };

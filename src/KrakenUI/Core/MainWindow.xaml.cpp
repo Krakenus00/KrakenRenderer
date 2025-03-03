@@ -1,3 +1,4 @@
+// Copyright 2023 Mykhailo Mushynskyi. All rights reserved.
 #include "pch.h"
 #include "MainWindow.xaml.h"
 #if __has_include("MainWindow.g.cpp")
@@ -122,14 +123,14 @@ namespace winrt::KrakenUI::implementation
         }
     }
 
-    void MainWindow::OnTitleBarLoaded(IInspectable const&, RoutedEventArgs const&)
+    void MainWindow::OnTitleBarLoaded(const IInspectable&, const RoutedEventArgs&)
     {
         titleBarSizeChangedRevoker = CustomDragRegion().SizeChanged(auto_revoke, { this, &MainWindow::OnTitleBarSizeChanged });
         // Doesn't do shit in XAML
         TitleBar().CloseButtonOverlayMode(TabViewCloseButtonOverlayMode::OnPointerOver);
     }
 
-    void MainWindow::OnTitleBarSizeChanged(IInspectable const&, SizeChangedEventArgs const& args)
+    void MainWindow::OnTitleBarSizeChanged(const IInspectable&, const SizeChangedEventArgs& args)
     {
         Size newSize = args.NewSize();
         auto scale = GetScaleAdjustment();
@@ -158,7 +159,7 @@ namespace winrt::KrakenUI::implementation
         titleBar.SetDragRectangles({ tabViewTopSpace, tabViewFooter });
     }
 
-    void MainWindow::OnTabCloseRequested(TabView const& sender, TabViewTabCloseRequestedEventArgs const& args)
+    void MainWindow::OnTabCloseRequested(const TabView& sender, const TabViewTabCloseRequestedEventArgs& args)
     {
         unsigned int index;
         auto tabs = sender.TabItems();
@@ -182,12 +183,12 @@ namespace winrt::KrakenUI::implementation
         return { ptr, take_ownership_from_abi };
     }
 
-    IReference<Windows::UI::Color> MainWindow::GetColor(winrt::hstring const& brushName)
+    IReference<Windows::UI::Color> MainWindow::GetColor(const winrt::hstring& brushName)
     {
         return Application::Current().Resources().Lookup(box_value(brushName)).as<SolidColorBrush>().Color();
     }
 
-    SystemBackdropTheme MainWindow::ConvertToSystemBackdropTheme(ElementTheme const& theme)
+    SystemBackdropTheme MainWindow::ConvertToSystemBackdropTheme(const ElementTheme& theme)
     {
         switch (theme)
         {
@@ -197,7 +198,7 @@ namespace winrt::KrakenUI::implementation
         }
     }
 
-    void MainWindow::OnClosed(IInspectable const&, WindowEventArgs const&)
+    void MainWindow::OnClosed(const IInspectable&, const WindowEventArgs&)
     {
         if (backdropController)
         {
@@ -213,12 +214,12 @@ namespace winrt::KrakenUI::implementation
         configuration = nullptr;
     }
 
-    void MainWindow::OnActivated(IInspectable const&, WindowActivatedEventArgs const& args)
+    void MainWindow::OnActivated(const IInspectable&, const WindowActivatedEventArgs& args)
     {
         configuration.IsInputActive(WindowActivationState::Deactivated != args.WindowActivationState());
     }
 
-    void MainWindow::OnThemeChanged(Microsoft::UI::Xaml::FrameworkElement const& sender, Windows::Foundation::IInspectable const&)
+    void MainWindow::OnThemeChanged(const Microsoft::UI::Xaml::FrameworkElement& sender, const Windows::Foundation::IInspectable&)
     {
         configuration.Theme(ConvertToSystemBackdropTheme(sender.ActualTheme()));
         // Update caption buttons
