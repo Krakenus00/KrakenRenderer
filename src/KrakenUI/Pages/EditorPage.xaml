@@ -1,3 +1,5 @@
+<!-- Copyright 2023 Mykhailo Mushynskyi. All rights reserved. -->
+
 <Page
     x:Class="KrakenUI.EditorPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -7,35 +9,43 @@
     mc:Ignorable="d">
     <Grid x:Name="RootGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="60*"/>
-            <RowDefinition Height="25*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15*"/>
-            <ColumnDefinition Width="60*"/>
-            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <SwapChainPanel x:Name="Viewport"
-                        Grid.Row="0"
-                        Grid.RowSpan="2"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2"/>
-        <StackPanel x:Name="RightColumn"
-                    Background="AliceBlue"
-                    Orientation="Vertical"
-                    Grid.Row="0"
-                    Grid.RowSpan="3"
-                    Grid.Column="2">
-
-        </StackPanel>
-        <StackPanel x:Name="BottomRow"
-                    Background="Aqua"
+        <StackPanel x:Name="ToolBar"
+                    Background="Red"
                     Orientation="Horizontal"
-                    Grid.Row="2"
+                    Height="40"
+                    Grid.Row="0"
                     Grid.Column="0"
                     Grid.ColumnSpan="2">
-
         </StackPanel>
+        <Grid Background="Black"
+              Grid.Row="1"
+              Grid.Column="0">
+            <SwapChainPanel x:Name="Viewport">
+                <!-- Fps counters and other mods like in UE -->
+                <!-- Floating asset view -->
+            </SwapChainPanel>
+        </Grid>
+        <StackPanel x:Name="RightPanel"
+                    Background="AliceBlue"
+                    Orientation="Vertical"
+                    Width="450"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Grid.Column="2">
+        </StackPanel>
+        <Grid x:Name="BottomBar"
+              Background="Yellow"
+              Height="20"
+              Grid.Row="2"
+              Grid.Column="0">
+        </Grid>
     </Grid>
 </Page>
